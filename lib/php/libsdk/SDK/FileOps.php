@@ -115,6 +115,8 @@ trait FileOps
 
 	protected function download(string $url, string $dest_fn = NULL) : ?string
 	{/*{{{*/
+		echo "Downloading $url to $dest_fn", PHP_EOL;
+
 		$fd = NULL;
 		$retry = 0;
 
@@ -145,6 +147,7 @@ retry:
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		if (false === $ret || 200 !== $code) {
 			$err = curl_error($ch);
+			echo "Error downloading $url: $err", PHP_EOL;
 			curl_close($ch);
 			if ($dest_fn) {
 				fclose($fd);

@@ -31,6 +31,7 @@ class Package
 
 	public function retrieve(string $path) : void
 	{/*{{{*/
+		echo "Retrieving package $path", PHP_EOL;
 		$this->filepath = $path . DIRECTORY_SEPARATOR . $this->name;
 
 		$cont = $this->fetcher->getByUri($this->getUri());
@@ -42,6 +43,7 @@ class Package
 
 	public function unpack(string $path) : void
 	{/*{{{*/
+		echo "Unpacking package $path", PHP_EOL;
 		if (!$this->filepath || !file_exists($this->filepath)) {
 			throw new Exception("Invalid filepath '{$this->filepath}'");
 		}
@@ -51,6 +53,7 @@ class Package
 
 	public function cleanup() : void
 	{/*{{{*/
+		echo "Cleaning package {$this->filepath}", PHP_EOL;
 		unlink($this->filepath);		
 	}/*}}}*/
 }
